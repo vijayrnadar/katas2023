@@ -1,7 +1,3 @@
-#- [Architecture Vision](#architecture-vision)
-    - [Motivation](#motivation)
-    - [Bussiness Requirement](#bussiness-requirement)
-    - [Technical Requirement](#technical-requirement)
 - [Motivation](#motivation)
 - [2. Bussiness Requirement](#2-bussiness-requirement)
 - [3. Technical Requirement](#3-technical-requirement)
@@ -10,6 +6,7 @@
     - [4.1.1. Customers](#411-customers)
     - [4.1.2. Reservation System](#412-reservation-system)
     - [4.1.3. External Reservation System](#413-external-reservation-system)
+    - [4.1.4. IT Support](#414-it-support)
   - [4.2. Business Processes](#42-business-processes)
     - [4.2.1. Hotel Reservation flow](#421-hotel-reservation-flow)
     - [4.2.2. Hotel Reservation update flow](#422-hotel-reservation-update-flow)
@@ -17,7 +14,6 @@
   - [5.1. Application Architecture](#51-application-architecture)
     - [5.1.1. Context Diagram](#511-context-diagram)
     - [5.1.2. Container Diagram](#512-container-diagram)
-      - [5.1.2.1. Integrated/Dependent Systems](#5121-integrateddependent-systems)
     - [5.1.3. Hotel Reservation Sequence](#513-hotel-reservation-sequence)
     - [5.1.4. Hotel Reservation Update Sequence](#514-hotel-reservation-update-sequence)
   - [5.2. Data Architecture](#52-data-architecture)
@@ -27,7 +23,6 @@
     - [5.2.4. Error Logs Data](#524-error-logs-data)
 - [6. Technology Architecture](#6-technology-architecture)
   - [6.1. Infratructure Diagram](#61-infratructure-diagram)
-  - [6.2. Infratructure  Component](#62-infratructure--component)
 - [7. Architecture Quality Attributes](#7-architecture-quality-attributes)
   - [7.1. Two million active users/week - Scalability](#71-two-million-active-usersweek---scalability)
   - [7.2. Access the system at all times - Availability](#72-access-the-system-at-all-times---availability)
@@ -134,6 +129,10 @@ Express and relate organizational structure, products, services, functions, proc
 - Send the exiting (hotel, airline, car rental) reservations  details
 - Send reservation updates to Reservation System
 
+### 4.1.4. IT Support
+- Receive email about failures 
+- Handle any manual intervention required in case of failure
+
 ## 4.2. Business Processes
 The system has the following business workflow scenario.
 - (Hotel, airline, car rental)  reservation flow
@@ -167,8 +166,6 @@ The system has the following business workflow scenario.
 
 ### 5.1.2. Container Diagram
 ![Alt text](ContainerDiagram.png)
-
-#### 5.1.2.1. Integrated/Dependent Systems
 
 | System            | Sub System           | Component                  | Function                                                                                                                  |
 |-------------------|----------------------|----------------------------|---------------------------------------------------------------------------------------------------------------------------|
@@ -234,7 +231,7 @@ The system has the following business workflow scenario.
   - Airline Database
   - CarRental Database
   - TripGroup Database
-- Only Single service can write to a table. Any service wants to update the table, needs to call the respective service
+- Only Single service can write to a table. Any service wants to write to the table, needs to call the respective service
 - Also we have No SQL database, which is a flat table
 ### 5.2.1. Hotel Reservation System Data Architecture 
 ![Alt text](HotelDataArchiecture.png)
@@ -250,8 +247,22 @@ The system has the following business workflow scenario.
 # 6. Technology Architecture
 ## 6.1. Infratructure Diagram
 ![Alt text](HotelPhysicalDiagram.png)
-- Diagram is similar for other domains like Airline, CarRental
-## 6.2. Infratructure  Component
+Simlary physical diagram for other domain Airline, CarRental
+
+| System  Component          | Cloud Component           | Description                  | 
+|-------------------|----------------------|----------------------------|
+| Load balancer | ELB | Any cloud component for scaling the load balancer |
+| CDN |CDN |Content delivery network to improve responsiveness and latency. Also user from different regions |
+| FrontEnd Web |Serverless |Any cloud provider for serverless |     
+| BFF |Apigateway |Apigateway service in Cloud |    
+| Hotel Reservation API |Serverless |Any cloud provider for serverless |    
+| Hotel Resolution API |Serverless |Any cloud provider for serverless |    
+| Hotel Reservation Consumer |Lambda |Lambda or Cloud funtions |   
+| Hotel Reservation Failed Consumer |Lambda |Lambda or Cloud funtions |   
+| Data Sync Background task |Lambda |Lambda or Cloud funtions |   
+| OAuth Server |Serverless |Any cloud provider for serverless| 
+| Message Broker Cluster |SQS |Any cloud provider for SQS with FIFO pattern and guranteed delivery at least once to consumer| 
+| PushNotification  |SNS |Any cloud provider for SNS | 
 
 # 7. Architecture Quality Attributes
 ## 7.1. Two million active users/week - Scalability 
