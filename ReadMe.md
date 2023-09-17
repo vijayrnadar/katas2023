@@ -1,4 +1,4 @@
-- [Motivation](#motivation)
+- [1. Motivation](#1-motivation)
 - [2. Business Requirement](#2-business-requirement)
 - [3. Technical Requirement](#3-technical-requirement)
 - [4. Bussiness Achitecture](#4-bussiness-achitecture)
@@ -71,12 +71,12 @@
     - [8.8.2. Context](#882-context)
     - [8.8.3. Decision](#883-decision)
     - [8.8.4. Consequences](#884-consequences)
-  - [8.8. Message broker Durability \& Scalability \& Reponsivness](#88-message-broker-durability--scalability--reponsivness)
-    - [8.8.1. Status](#881-status-1)
-    - [8.8.2. Context](#882-context-1)
-    - [8.8.3. Decision](#883-decision-1)
-    - [8.8.4. Consequences](#884-consequences-1)
-# Motivation
+  - [8.9. Message broker Durability \& Scalability \& Reponsivness](#89-message-broker-durability--scalability--reponsivness)
+    - [8.9.1. Status](#891-status)
+    - [8.9.2. Context](#892-context)
+    - [8.9.3. Decision](#893-decision)
+    - [8.9.4. Consequences](#894-consequences)
+# 1. Motivation
 A new startup wants to build the next-generation online trip management dashboard to allow travelers to see all of their existing reservations organized by trip either online (web) 
 or through their mobile device.
 # 2. Business Requirement 
@@ -471,23 +471,23 @@ The development team needs to be trained
 - Handling distributed transactions is tricky
 - Error handling is complex but can be
 
-##   8.8. Message broker Durability & Scalability & Reponsivness
+##   8.9. Message broker Durability & Scalability & Reponsivness
 
-### 8.8.1. Status 
+### 8.9.1. Status 
 Proposed
 
-### 8.8.2. Context
+### 8.9.2. Context
 
  The reservation system needs designed for scalability needs a distributed system, which requires message broker to be scalable.
   
-### 8.8.3. Decision
+### 8.9.3. Decision
 
 After careful evaluation and consideration, we have decided below
 - Message broker Queue message need to be durable, since server restart needs to have the message
 - Message expiration needs to be less since less than 5 minutes user need to be updated
 - Deal letter exchange need to be configured for expired and failed message
 
-### 8.8.4. Consequences
+### 8.9.4. Consequences
 
 The decision  has the following consequences:
 - The development team needs to be trained handling message broker 
