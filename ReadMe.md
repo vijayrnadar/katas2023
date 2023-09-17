@@ -1,5 +1,5 @@
 - [Motivation](#motivation)
-- [2. Bussiness Requirement](#2-bussiness-requirement)
+- [2. Business Requirement](#2-business-requirement)
 - [3. Technical Requirement](#3-technical-requirement)
 - [4. Bussiness Achitecture](#4-bussiness-achitecture)
   - [4.1. Actors](#41-actors)
@@ -29,7 +29,7 @@
   - [7.3. Travel updates within 5 minutes - Responsiveness](#73-travel-updates-within-5-minutes---responsiveness)
   - [7.4. Response time from web (800ms) - Usability and User Experience (UX)](#74-response-time-from-web-800ms---usability-and-user-experience-ux)
   - [7.5. Richest user interface possible across all deployment platforms - Performance](#75-richest-user-interface-possible-across-all-deployment-platforms---performance)
-  - [7.6. Autentication](#76-autentication)
+  - [7.6. Authentication](#76-authentication)
 - [8. Architecture Decision Records](#8-architecture-decision-records)
   - [8.1. Architectural Structures and Styles](#81-architectural-structures-and-styles)
     - [8.1.1. Status](#811-status)
@@ -71,10 +71,10 @@
     - [8.8.2. Context](#882-context)
     - [8.8.3. Decision](#883-decision)
     - [8.8.4. Consequences](#884-consequences)
-#	Motivation
-A new startup wants to build the next generation online trip management dashboard to allow travelers to see all of their existing reservations organized by trip either online (web) 
+# Motivation
+A new startup wants to build the next-generation online trip management dashboard to allow travelers to see all of their existing reservations organized by trip either online (web) 
 or through their mobile device.
-# 2. Bussiness Requirement 
+# 2. Business Requirement 
 - Poll email looking for travel-related emails
 - Filter and whitelist certain emails
 - The system must interface with the agency’s existing airline, hotel, and car rental interface system to update travel details (delays, cancellations, updates, gate changes, etc.). Updates must be in the app within 5 minutes of an update (better than the competition)
@@ -87,13 +87,13 @@ dashboard.
 information by interfacing with standard social 
 media sites or allowing targeted people to view 
 your trip.
-- Richest user interface possible across all deployment platforms requirements
+- Richest user interface possible across all deployment platform requirements
 - Provide end-of-year summary reports for users with a wide range of metrics about their travel usage
-- Road Warrior gathers analytical data from users 
+- Road Warrior gathers analytical data from users' 
 trips for various purposes 
 - travel trends, locations, airline and hotel vendor preferences, cancellation and update frequency, and so on
-- Must integrate seamlessly with existing travel systems (i.e, SABRE, APOLLO)
-- Must integrate with preferred travel agency for quick problem resolution (help me!)
+- Must integrate seamlessly with existing travel systems (i.e., SABRE, APOLLO)
+- Must integrate with a preferred travel agency for quick problem resolution (help me!)
 - Must work internationally
   
 # 3. Technical Requirement 
@@ -115,19 +115,19 @@ Express and relate organizational structure, products, services, functions, proc
 - Filter and whitelist certain emails
 
 ### 4.1.2. Reservation System
-- Poll email to check the travel related emails
+- Poll email to check the travel-related emails
 - Remove completed trip
 - Send end-of-year summary reports
 - Gathers analytical data 
-- Add, Updat, or delete existing (hotel, airline, car rental) reservations from respective external reservation system
+- Add, Update, or delete existing (hotel, airline, car rental) reservations from the respective external reservation system
 - Raise query to respective external query resolution agency
 - Send existing (hotel, airline, car rental) reservations updates to client
   
 ### 4.1.3. External Reservation System
 - Update, or delete existing (hotel, airline, car rental) reservations  details
-- Send quick problem resolution response
-- Send the exiting (hotel, airline, car rental) reservations  details
-- Send reservation updates to Reservation System
+- Send quick problem-resolution response
+- Send the exiting (hotel, airline, car rental) reservation details
+- Send reservation updates to the Reservation System
 
 ### 4.1.4. IT Support
 - Receive email about failures 
@@ -199,18 +199,18 @@ The system has the following business workflow scenario.
 | External System|   | Push Notification  Provider   | <li>Send Push notification to receipent</li> |  
 | Trip management System | Authentication  | OAuth Server   | <li>User authentication</li><li>Authenticate user and client based on OAuth flow</li> | 
 | Trip management System | Authentication  | OAuth Database   | <li>Saves the user information</li><li>Saved client detaiks</li><li>Saved refresh token, user token</li> | 
-| Trip management System | Trip Group System  | Trip Group API   | <li>Add/Delete/Update reservation in all domain to trip group</li><li>Saved in database</li> | 
-| Trip management System | Trip Group System  | All Domain Reservation API   | <li>Add/Update/Delete all domain reservation to flat table</li> | 
+| Trip management System | Trip Group System  | Trip Group API   | <li>Add/Delete/Update reservation in all domains to trip group</li><li>Saved in database</li> | 
+| Trip management System | Trip Group System  | All Domain Reservation API   | <li>Add/Update/Delete all domain reservations to flat table</li> | 
 | Trip management System | Trip Group System  | FilterEmail API   | <li>Filter email configuration add/update/delete saved to database </li> | 
 | Trip management System | Trip Group System  | Remove Completed Trip Background Tasks   | Background Job <li>Mark the completed trip to status completed</li> | 
 | Trip management System | Trip Group System  | Reservation Flat tables  | <li>Saves the all domain reservation in flat strucutre</li> | 
 | Trip management System |   | Message Broker  | Message broker cluster for distributed messaging | 
 | Trip management System | Trip Group System  | Trip Group Database  | Saving Trip group system | 
-| Trip management System | Trip Group System  | Year End Report Background Tasks   |  <li> Background jobs runs yearly and send user year report of trip  </li> | 
-| External System | Email Provider  | Email Service   |  <li> Send email to receipient </li> | 
-| External System | SMS Provider  | SMS Service   |  <li> Send SMS to receipient </li> | 
-| External System | Push Notifications  | Push Notifications Service   |  <li> Send Push Notifications to receipient </li> | 
-| External System | Push Notifications  | Push Notifications Service   |  <li> Send Push Notifications to receipient </li> | 
+| Trip management System | Trip Group System  | Year End Report Background Tasks   |  <li> Background jobs run yearly and send user year report of trip  </li> | 
+| External System | Email Provider  | Email Service   |  <li> Send email to recipient </li> | 
+| External System | SMS Provider  | SMS Service   |  <li> Send SMS to recipient </li> | 
+| External System | Push Notifications  | Push Notifications Service   |  <li> Send Push Notifications to recipient </li> | 
+| External System | Push Notifications  | Push Notifications Service   |  <li> Send Push Notifications to recipient </li> | 
 | External System | Hotel Agency System  | Hotel Agency  Service   |  <li> Get exiting hotel reservation detail </li> <li> Notiy any update exiting hotel reservation detail  </li>| 
 | External System | Airline Agency System  | Airline Agency  Service   |   <li> Get exiting Airline reservation detail </li> <li> Notiy any update exiting Airline reservation detail  </li> | 
 | External System | CarRental Agency System | CarRental Agency  Service   |   <li> Get exiting CarRental reservation detail </li> <li> Notiy any update exiting CarRental reservation detail  </li> | 
@@ -231,28 +231,28 @@ The system has the following business workflow scenario.
   - Airline Database
   - CarRental Database
   - TripGroup Database
-- Only Single service can write to a table. Any service wants to write to the table, needs to call the respective service
+- Only a Single service can write to a table. Any service that wants to write to the table, needs to call the respective service
 - Also we have No SQL database, which is a flat table
 ### 5.2.1. Hotel Reservation System Data Architecture 
 ![Alt text](HotelDataArchiecture.png)
-- Airline, Carental follow same architecture
+- Airline, Carental follows the same architecture
 ### 5.2.2. Notification System Data Architecture 
 ![Alt text](NotificationQueueDataArchitecture.png)
 ### 5.2.3. Trip Group System Data Architecture 
 ![Alt text](TripGroupDataArchitecture.png)
 ### 5.2.4. Error Logs Data
-- Error logs is saved in file in each system and pushed to elastic search server
-- File beat or any other mechanis, can be used to send error file log to elastic server
+- Error logs are saved in a file in each system and pushed to the elastic search server
+- File beat or any other mechanism, can be used to send error file logs to the elastic server
 
 # 6. Technology Architecture
 ## 6.1. Infratructure Diagram
 ![Alt text](HotelPhysicalDiagram.png)
-Simlary physical diagram for other domain Airline, CarRental
+Similar physical diagram for other domains Airline, CarRental
 
 | System  Component          | Cloud Component           | Description                  | 
 |-------------------|----------------------|----------------------------|
 | Load balancer | ELB | Any cloud component for scaling the load balancer |
-| CDN |CDN |Content delivery network to improve responsiveness and latency. Also user from different regions |
+| CDN |CDN |Content delivery network to improve responsiveness and latency. Also users from different regions |
 | FrontEnd Web |Serverless |Any cloud provider for serverless |     
 | BFF |Apigateway |Apigateway service in Cloud |    
 | Hotel Reservation API |Serverless |Any cloud provider for serverless |    
@@ -261,26 +261,26 @@ Simlary physical diagram for other domain Airline, CarRental
 | Hotel Reservation Failed Consumer |Lambda |Lambda or Cloud funtions |   
 | Data Sync Background task |Lambda |Lambda or Cloud funtions |   
 | OAuth Server |Serverless |Any cloud provider for serverless| 
-| Message Broker Cluster |SQS |Any cloud provider for SQS with FIFO pattern and guranteed delivery at least once to consumer| 
+| Message Broker Cluster |SQS |Any cloud provider for SQS with FIFO pattern and guaranteed delivery at least once to consumer| 
 | PushNotification  |SNS |Any cloud provider for SNS | 
 
 # 7. Architecture Quality Attributes
 ## 7.1. Two million active users/week - Scalability 
-Architecture needs to be capable to scale as the number of users grow and active. It requires careful planning and infrastructure design. 
+Architecture needs to be capable of scaling as the number of users grows and is active. It requires careful planning and infrastructure design. 
 
 ## 7.2. Access the system at all times - Availability 
 Ensuring availability in a system means that the system should be accessible and operational at all times, without significant interruptions or downtime. Availability is one of the key attributes of a reliable and robust system, and it is critical for providing a seamless user experience and meeting service level agreements (SLAs)
 
 ## 7.3. Travel updates within 5 minutes - Responsiveness
-Responsiveness is a key quality attribute in system architecture that focuses on delivering timely and quick responses to user requests or system events.
+Responsiveness is a key quality attribute in a system architecture that focuses on delivering timely and quick responses to user requests or system events.
 
 ## 7.4. Response time from web (800ms) - Usability and User Experience (UX)
 A response time of 800 milliseconds for a web application represents a well-optimized and responsive system. It reflects the system's ability to swiftly process incoming requests, retrieve data, execute necessary operations, and deliver the desired content back to users.
 
 ## 7.5. Richest user interface possible across all deployment platforms - Performance
 Usability and UX address the quality of the user interface and the overall user experience, ensuring that users can interact with the system effectively and enjoy a positive, intuitive, and engaging experience
-## 7.6. Autentication
-OAuth flow for authetication  the system and components. It works well with centralized and distributed architecture
+## 7.6. Authentication
+OAuth flow for authentication of the system and components. It works well with centralized and distributed architecture
 
 
 # 8. Architecture Decision Records
@@ -292,15 +292,15 @@ Proposed
 
 ### 8.1.2. Context
 
-The reservation sytsem spread across multiple domain like airline, hotel and car rental, also system needs to be scalable. We are looking for a  architectural structure of the system that promotes a clear understanding of our business domain and aligns software design with business goals.
+The reservation system is spread across multiple domains like airline, hotel, and car rental, also system needs to be scalable. We are looking for an architectural structure of the system that promotes a clear understanding of our business domain and aligns software design with business goals.
  
 ### 8.1.3. Decision
 After careful evaluation and consideration, we have decided to adopt Domain-Driven Design (DDD) as our architectural structure of the system. This decision is based on the following factors:
-- DDD encourages a close collaboration between domain experts and developers, ensuring that our software reflects the real-world business domain. This alignment with business goals
+- DDD encourages close collaboration between domain experts and developers, ensuring that our software reflects the real-world business domain. This alignment with business goals
 -  DDD promotes modularization, making our system more scalable and maintainable as it grows.
 - DDD emphasizes the use of a common language that bridges the gap between technical and non-technical stakeholders
 - DDD's focus on bounded contexts and aggregates allows us to build and evolve components of our system independently
-- Allowing teams to pinpoint exactly the area of the system that requires the change and also troubleshoot issue
+- Allowing teams to pinpoint exactly the area of the system that requires the change and also troubleshoot the issue
 - Changes in code are isolated to only one small part of the system
 - Plug-in components are used to extend the application by adding functionality
 - 
@@ -319,18 +319,18 @@ Proposed
 
 ### 8.2.2. Context
 
-The system needs to be scalable and low latency. Reservation system spread accorss multiple domain and compelxity will grow. We are looking for an architectural pattern to improve performance of query execution and there by latency will be improved.
+The system needs to be scalable and low latency. Reservation systems spread across multiple domains and complexity will grow. We are looking for an architectural pattern to improve the performance of query execution and their latency will be improved.
  
 ### 8.2.3. Decision
 
 After careful evaluation and consideration, we have decided to adopt the Command Query Responsibility Segregation (CQRS) architectural pattern as part of our system architecture. This decision is based on the following factors:
 - CQRS devotes a single model to executing operations that modify the system’s state (system commands). 
-- Syncronous Projecting Read Models
+- Synchronous Projecting Read Models
 ![Alt text](ProjectionEngineReadModel.png)
   - Improves the read query performance and overall application performance
   - The synchronous projection method makes it trivial to add new projections and regenerate existing ones from scratch. 
 - CQRS allows us to scale the command and query sides independently. This is crucial for handling increasing workloads and ensuring optimal system performance.
-- To leverage perfrmance benifit of search index for full text search, and prerendered flat files for fast data retrieval
+- To leverage the performance benefit of search index for full-text search, and prerendered flat files for fast data retrieval
 ### 8.2.4. Consequences
 
 The decision to adopt CQRS has the following consequences:
@@ -344,7 +344,7 @@ Proposed
 
 ### 8.3.2. Context
 
- Reservation system spread accorss multiple domain and compelxity will grow. Different teams will create different code base style and pattern. Need to bring uniformity across projects and team
+ Reservation systems spread across multiple domains and complexity will grow. Different teams will create different code base styles and patterns. Need to bring uniformity across projects and team
  
 ### 8.3.3. Decision
 
@@ -364,7 +364,7 @@ Proposed
 
 ### 8.4.2. Context
 
- Reservation system spread accorss multiple domain and compelxity will grow. Different teams will create different code base style and pattern. Need to bring uniformity across projects and team
+ Reservation systems spread across multiple domains and complexity will grow. Different teams will create different code base styles and patterns. Need to bring uniformity across projects and team
  
 ### 8.4.3. Decision
 
@@ -385,19 +385,19 @@ Proposed
 
 ### 8.5.2. Context
 
- Reservation system spread accorss multiple domain and growing data and team structure the data maintenance and  structure will be a nightmare with different teams 
+ The reservation system is spread across multiple domains and growing data and team structure the data maintenance and  structure will be a nightmare with different teams 
  
 ### 8.5.3. Decision
 
-After careful evaluation and consideration, we have decided to adopt Single Ownership Data principle. This decision is based on the following factors:
+After careful evaluation and consideration, we have decided to adopt the Single Ownership Data principle. This decision is based on the following factors:
 - Single table ownership occurs when only one service writes to a table. 
 - Preserve bounded context
-- Clear defined resposnibility of service and data
+- Clear defined responsibility of service and data
 
 ### 8.5.4. Consequences
 
-The decision to adopt Single reponsibility principle has the following consequences:
-- Table might have to split in case of future enhancement
+The decision to adopt the Single reponsibility principle has the following consequences:
+The table might have to split in case of future enhancement
 - The type of communication protocol (synchronous versus asynchronous) also matters when splitting a table
 
 
@@ -408,18 +408,18 @@ Proposed
 
 ### 8.6.2. Context
 
- Reservation system is complex system and requires infrasture in case hosted on premises
+ The reservation system is complex and requires infrastructure in case hosted on-premises
 ### 8.6.3. Decision
 
-After careful evaluation and consideration, we have decided to adopt Cloud as Hosting Platform. Any cloud provide AWS/GCP/Azure can be used. This decision is based on the following factors:
-- Hosting cost will be significantly reduced. 
-- Scalability can easily acheived with our application design
+After careful evaluation and consideration, we have decided to adopt the Cloud as a Hosting Platform. Any cloud provider AWS/GCP/Azure can be used. This decision is based on the following factors:
+- Hosting costs will be significantly reduced. 
+- Scalability can easily be achieved with our application design
 
 ### 8.6.4. Consequences
 
-The decision to adopt Cloud hosting platform has the following consequences:
-- Need expert and well trained cloud team
-- Proper costing analysis need to be done for various cloud services
+The decision to adopt a Cloud hosting platform has the following consequences:
+- Need expert and well-trained cloud team
+- Proper costing analysis needs to be done for various cloud services
   
 ##   8.7. Rich user interface
 
@@ -428,19 +428,19 @@ Proposed
 
 ### 8.7.2. Context
 
- Reservation system has web and mobile interface and data needs to fetched from lots of services from front end application.
+ The reservation system has a web and mobile interface and data needs to be fetched from lots of services from front-end applications.
   
 ### 8.7.3. Decision
 
-After careful evaluation and consideration, we have decided to adopt Backend for Frontend . This decision is based on the following factors:
+After careful evaluation and consideration, we have decided to adopt the Backend for Frontend. This decision is based on the following factors:
 - This pattern has proved to be very successful in helping handle the differing concerns of user interfaces
 - Avoids becoming a bottleneck for development, with multiple teams all trying to share ownership.
 
 ### 8.7.4. Consequences
 
-The decision to adopt Backend for Frontend pattern has the following consequences:
-- Additional layer need to developed and maintanined
-- Code duplication possible, so proper consideration proper bff
+The decision to adopt the Backend for Frontend pattern has the following consequences:
+- Additional layers need to be developed and maintained
+- Code duplication is possible, so proper consideration proper BFF
   
 
 ##   8.8. Performance and Scalability
@@ -450,18 +450,18 @@ Proposed
 
 ### 8.8.2. Context
 
- Reservation system needs to scalable to met demand of 1million lus users.
+ The reservation system needs to be scalable to meet the demand of 1 million plus users.
   
 ### 8.8.3. Decision
 
-After careful evaluation and consideration, we have decided to adopt eventual consistency . This decision is based on the following factors:
-- With distributed applciation and eventual consistency services can be scalable and good in performance
+After careful evaluation and consideration, we have decided to adopt eventual consistency. This decision is based on the following factors:
+- With distributed application and eventual consistency services can be scalable and good in performance
 - Latency can be reduced.
-- Applciation becomes more responsive
+- Application becomes more responsive
 
 ### 8.8.4. Consequences
 
 The decision to eventual consistency  has the following consequences:
-- Development team needs to be trained
-- Handling distributed transaction is tricky
+The development team needs to be trained
+- Handling distributed transactions is tricky
 - Error handling is complex but can be
